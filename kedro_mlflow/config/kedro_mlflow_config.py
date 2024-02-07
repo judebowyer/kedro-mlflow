@@ -30,7 +30,6 @@ class RequestHeaderProviderOptions(BaseModel):
         # necessary to check instance of RequestHeaderProvider:
         arbitrary_types_allowed = "allowed"
 
-
 class MlflowServerOptions(BaseModel):
     # mutable default is ok for pydantic : https://stackoverflow.com/questions/63793662/how-to-give-a-pydantic-list-field-a-default-value
     mlflow_tracking_uri: Optional[str] = None
@@ -115,11 +114,12 @@ class KedroMlflowConfig(BaseModel):
     tracking: MlflowTrackingOptions = MlflowTrackingOptions()
     ui: UiOptions = UiOptions()
 
+
     class Config:
         # force triggering type control when setting value instead of init
         validate_assignment = True
         # raise an error if an unknown key is passed to the constructor
-        extra = "forbid"
+        # extra = "forbid"
 
     def setup(self, context):
         """Setup all the mlflow configuration"""
